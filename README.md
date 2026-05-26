@@ -2,6 +2,8 @@
 
 **[Live map](https://gp-80.github.io/greece-wildfire-analysis/greece_burned_2000_2025.html)** — opens directly in the browser, no login required.
 
+![Cumulative burned area across Greece 2000–2025](assets/preview.jpg)
+
 Annual burned area mapping across Greece using MODIS satellite data processed via Google Earth Engine, rendered as a self-contained interactive Folium map.
 
 ---
