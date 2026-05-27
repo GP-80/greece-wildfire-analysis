@@ -270,11 +270,51 @@ def build_map():
 
     folium.LayerControl(collapsed=False).add_to(m)
 
+    # ---- viewport + responsive CSS -----------------------------------------
+    m.get_root().header.add_child(folium.Element(
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+    ))
+    m.get_root().header.add_child(folium.Element("""<style>
+/* tablet: layer list scrollable so it never overflows the screen */
+@media (max-width: 1024px) {
+    .leaflet-control-layers-list {
+        max-height: 55vh;
+        overflow-y: auto;
+    }
+}
+/* phone */
+@media (max-width: 600px) {
+    #_map_title {
+        font-size: 13px !important;
+        padding: 5px 10px !important;
+        max-width: 56vw !important;
+        white-space: normal !important;
+        line-height: 1.3 !important;
+    }
+    #_area_panel {
+        padding: 5px 10px !important;
+        bottom: 30px !important;
+    }
+    #_area_km2 { font-size: 15px !important; }
+    #_area_n   { font-size: 10px !important; }
+    .leaflet-control-layers { padding: 5px 10px !important; }
+    .leaflet-control-layers-overlays label {
+        font-size: 11px !important;
+        line-height: 1.7 !important;
+    }
+    .leaflet-control-layers-list {
+        max-height: 45vh !important;
+        overflow-y: auto !important;
+    }
+}
+</style>"""))
+
     # ---- static UI elements -------------------------------------------------
     m.get_root().html.add_child(folium.Element(f"""
-<div style="position:fixed;top:10px;left:50%;transform:translateX(-50%);
+<div id="_map_title" style="position:fixed;top:10px;left:50%;transform:translateX(-50%);
 z-index:9999;background:rgba(255,255,255,0.9);padding:8px 18px;
-border-radius:8px;font-size:18px;font-weight:700;color:#222;text-align:center;">
+border-radius:8px;font-size:18px;font-weight:700;color:#222;text-align:center;
+white-space:nowrap;">
 {MAP_TITLE}</div>"""))
 
     m.get_root().html.add_child(folium.Element(f"""
