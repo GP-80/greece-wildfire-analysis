@@ -282,12 +282,15 @@ def build_map():
         overflow-y: auto;
     }
 }
-/* phone */
-@media (max-width: 600px) {
+/* mobile: compact UI, title moves to top-left to clear the layer panel */
+@media (max-width: 768px) {
     #_map_title {
+        left: 10px !important;
+        transform: none !important;
+        text-align: left !important;
         font-size: 13px !important;
         padding: 5px 10px !important;
-        max-width: 56vw !important;
+        max-width: calc(100vw - 80px) !important;
         white-space: normal !important;
         line-height: 1.3 !important;
     }
@@ -408,6 +411,7 @@ window.addEventListener('load', function() {{
     }}
 
     var map = window['{map_var}'];
+    if (window.innerWidth <= 768) {{ map.setZoom(5); }}
     map.on('overlayadd',    function(e) {{
         if (burned.hasOwnProperty(e.name)) {{ visible[e.name] = true;  update(); }}
     }});
