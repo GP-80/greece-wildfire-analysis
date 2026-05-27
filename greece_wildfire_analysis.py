@@ -282,9 +282,11 @@ def build_map():
         overflow-y: auto;
     }
 }
-/* mobile: compact UI, title moves to top-left to clear the layer panel */
+/* mobile: title moves to bottom-left, just above the data source label */
 @media (max-width: 768px) {
     #_map_title {
+        top: auto !important;
+        bottom: 38px !important;
         left: 10px !important;
         transform: none !important;
         text-align: left !important;
