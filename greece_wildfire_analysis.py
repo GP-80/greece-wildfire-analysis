@@ -292,10 +292,11 @@ def build_map():
         text-align: left !important;
         font-size: 13px !important;
         padding: 5px 10px !important;
-        max-width: calc(100vw - 80px) !important;
+        max-width: 55vw !important;
         white-space: normal !important;
         line-height: 1.3 !important;
     }
+    #_title_year { display: block !important; }
     #_area_panel {
         padding: 5px 10px !important;
         bottom: 30px !important;
@@ -319,8 +320,7 @@ def build_map():
 <div id="_map_title" style="position:fixed;top:10px;left:50%;transform:translateX(-50%);
 z-index:9999;background:rgba(255,255,255,0.9);padding:8px 18px;
 border-radius:8px;font-size:18px;font-weight:700;color:#222;text-align:center;
-white-space:nowrap;">
-{MAP_TITLE}</div>"""))
+white-space:nowrap;">Annual Burned Area in Greece<span id="_title_year"> (2000&#8211;2025)</span></div>"""))
 
     m.get_root().html.add_child(folium.Element(f"""
 <div style="position:fixed;bottom:10px;left:10px;z-index:9999;
