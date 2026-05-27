@@ -342,6 +342,12 @@ font-size:12px;color:#333;">{DATA_SOURCE}</div>"""))
     m.get_root().html.add_child(folium.Element(f"""<script>
 window.addEventListener('load', function() {{
 
+    // on mobile, start the layer panel collapsed so it doesn't cover the map
+    if (window.innerWidth <= 768) {{
+        var ctrl = document.querySelector('.leaflet-control-layers');
+        if (ctrl) ctrl.classList.remove('leaflet-control-layers-expanded');
+    }}
+
     // layer control styling
     var s = document.createElement('style');
     s.textContent =
