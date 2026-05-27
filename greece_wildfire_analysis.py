@@ -268,13 +268,18 @@ def build_map():
         ).add_to(m)
         print("OK")
 
-    folium.LayerControl(collapsed=False).add_to(m)
+    folium.LayerControl(collapsed=True).add_to(m)
 
     # ---- viewport + responsive CSS -----------------------------------------
     m.get_root().header.add_child(folium.Element(
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
     ))
     m.get_root().header.add_child(folium.Element("""<style>
+/* desktop: keep panel permanently open; hide the toggle icon */
+@media (min-width: 769px) {
+    .leaflet-control-layers-list   { display: block !important; }
+    .leaflet-control-layers-toggle { display: none  !important; }
+}
 /* tablet: layer list scrollable so it never overflows the screen */
 @media (max-width: 1024px) {
     .leaflet-control-layers-list {
@@ -346,12 +351,6 @@ font-size:12px;color:#333;">{DATA_SOURCE}</div>"""))
 
     m.get_root().html.add_child(folium.Element(f"""<script>
 window.addEventListener('load', function() {{
-
-    // on mobile, start the layer panel collapsed so it doesn't cover the map
-    if (window.innerWidth <= 768) {{
-        var ctrl = document.querySelector('.leaflet-control-layers');
-        if (ctrl) ctrl.classList.remove('leaflet-control-layers-expanded');
-    }}
 
     // layer control styling
     var s = document.createElement('style');
